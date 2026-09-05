@@ -61,3 +61,6 @@ module.exports = async function fuzz(args) {
   }
   return
 }
+if (require.main === module) {
+  module.exports(process.argv.slice(2)).then(() => process.exit(0)).catch(e => { console.error(e); process.exit(1) })
+}

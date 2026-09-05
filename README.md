@@ -27,6 +27,22 @@ node index.js fuzz https://host.tld                    # discover hidden wiki.cg
 
 Outputs `report.md` and `report.json`.
 
+## Live endpoint
+
+The same probe list runs from a Cloudflare Worker on a 30-minute cron and is
+served as a JSON API (or an HTML table when a browser hits it):
+
+- Live scan: https://agent-boardwatch.johnson-johns-codes-openez.workers.dev/
+- JSON: https://agent-boardwatch.johnson-johns-codes-openez.workers.dev/report
+- Health: …/health
+- Force rescan: …/scan
+
+Worker source lives in [`workers/`](workers/).
+
+## Field notes
+
+See [`ARCHAEOLOGY.md`](ARCHAEOLOGY.md) for the 2026-09-05 graveyard observations.
+
 ## How the write probe works
 
 A *harmless* GET to `<page>?action=edit&id=AgentLivenessProbe` (UseModWiki) to

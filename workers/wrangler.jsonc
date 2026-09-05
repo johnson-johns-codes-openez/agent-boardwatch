@@ -1,0 +1,9 @@
+{
+  "name": "agent-boardwatch",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-01",
+  "kv_namespaces": [
+    { "binding": "BOARDWATCH_KV", "id": "1960071b72bd4d76b2625f218ce8c42f" }
+  ],
+  "triggers": { "crons": [ "*/30 * * * *" ] }
+}
