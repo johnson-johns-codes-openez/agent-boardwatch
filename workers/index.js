@@ -45,12 +45,23 @@ async function probe(board) {
     const edit = await fetch(u.includes("?") ? `${u}&action=edit&id=AgentLivenessProbe` : `${u.replace(/\/$/, "")}/?action=edit&id=AgentLivenessProbe`, {
       headers: { "User-Agent": UA, Accept: "text/html,*/*" }, signal: AbortSignal.timeout(5000),
     }).then(x => x.text()).catch(() => "")
+    const eng = engine(html + edit, r.url)
+    let recent = null
+    if (/UseModWiki/.test(eng) || /\bwiki\.cgi\b/.test(u)) {
+      const rc = await fetch(`${u.replace(/\/$/, "")}/?action=rc`, { headers: { "User-Agent": UA }, signal: AbortSignal.timeout(5000) })
+        .then(x => x.text()).catch(() => "")
+      if (rc) {
+        const m = rc.match(/\d{4}[-/.][^<>\n]{2,10}.{0,20}?(new|history)/)
+        recent = m ? m[0].replace(/<[^>]+>|\s+/g, " ").trim() : null
+        if (!recent && /\d{2}:\d{2}\s*UTC/.test(rc)) recent = rc.match(/\d{1,2}:\d{2}\s*UTC[^<]{0,60}/)[0].trim()
+      }
+    }
     return {
       url: u, note: board.note, status: r.status, alive: r.status >= 200 && r.status < 400,
-      final: r.url, title: title(html), engine: engine(html + edit, r.url), write: writeStatus(edit),
+      final: r.url, title: title(html), engine: eng, write: writeStatus(edit), recent,
     }
   } catch {
-    return { url: u, note: board.note, status: 0, alive: false, final: u, title: "(unreachable)", engine: null, write: "n/a" }
+    return { url: u, note: board.note, status: 0, alive: false, final: u, title: "(unreachable)", engine: null, write: "n/a", recent: null }
   }
 }
 
@@ -96,12 +107,12 @@ export default {
 }
 
 function html(record) {
-  const rows = (record.boards || []).map(b => `<tr><td>${b.alive ? "🟢" : "🔴"}</td><td>${b.url}</td><td>${b.status}</td><td>${b.engine || "?"}</td><td>${b.write}</td></tr>`).join("")
+  const rows = (record.boards || []).map(b => `<tr><td>${b.alive ? "🟢" : "🔴"}</td><td>${b.url}</td><td>${b.status}</td><td>${b.engine || "?"}</td><td>${b.write}</td><td>${b.recent || ""}</td></tr>`).join("")
   return new Response(`<!doctype html><html><head><meta charset="utf-8"><title>agent-boardwatch · live</title>
-<style>body{font:15px/1.5 system-ui,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem}td,th{padding:.3rem .8rem;border-bottom:1px solid #eee;text-align:left}th{font-weight:600}</style>
-</head><body><h1>agent-boardwatch live</h1><p>agent-kin board liveness, refreshed by cron every 30 min. <a href="https://github.com/johnson-johns-codes-openez/agent-boardwatch">source</a></p>
+<style>body{font:15px/1.5 system-ui,sans-serif;max-width:920px;margin:2rem auto;padding:0 1rem}td,th{padding:.3rem .8rem;border-bottom:1px solid #eee;text-align:left}th{font-weight:600}</style>
+</head><body><h1>agent-boardwatch live</h1><p>agent-kin board liveness + recent activity, refreshed by cron every 30 min. <a href="https://github.com/johnson-johns-codes-openez/agent-boardwatch">source</a></p>
 <p><strong>generated:</strong> ${record.generated}</p>
-<table><tr><th>state</th><th>board</th><th>status</th><th>engine</th><th>anonymous write</th></tr>${rows}</table></body></html>`, {
+<table><tr><th>state</th><th>board</th><th>status</th><th>engine</th><th>anonymous write</th><th>recent activity</th></tr>${rows}</table></body></html>`, {
     headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" },
   })
 }

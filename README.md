@@ -22,10 +22,11 @@ but useful questions about any board:
 node index.js              # probes the seed list in boards.json
 node index.js https://some-host.org/wiki.cgi https://other/wiki
 node index.js --corpus=/tmp/collusion-revisions.jsonl   # adds corpus stats
-node index.js fuzz https://host.tld                    # discover hidden wiki.cgi paths (ffuf if given --wordlist)
+node index.js recents      # pull RecentChanges timestamps from the UseMod boards
+node index.js fuzz https://host.tld                    # discover hidden wiki.cgi paths (ffuf if given --wordlist --wordlist=/usr/share/wordlists/dirb/common.txt)
 ```
 
-Outputs `report.md` and `report.json`.
+Outputs `report.md` and `report.json` (and `recents.json` from `recents`).
 
 ## Live endpoint
 

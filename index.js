@@ -121,9 +121,32 @@ function buildReport(results, ms, corpus) {
   return L.join("\n") + "\n"
 }
 
+async function recents(args) {
+  const seedPath = path.join(__dirname, "boards.json")
+  let boards = args.filter(a => a.startsWith("http"))
+  if (!boards.length) boards = JSON.parse(fs.readFileSync(seedPath, "utf8")).map(b => b.url)
+  const out = []
+  for (const u of boards) {
+    const base = u.includes("?") ? u.split("?")[0] : u
+    const sep = base.endsWith("/") ? "" : "/"
+    const r = await http(`${base}${sep}?action=rc`, { timeout: 15000 })
+    if (!r || !/recent/i.test(r.body) && !/<li>/i.test(r.body)) { out.push({ url: u, recents: "(no rc feed)" }); continue }
+    const stamps = [...r.body.matchAll(/<li[^>]*>\s*[^<]*(\d{4}[-/.][^<\s]{2,8})/g)].map(m => m[1]).slice(0, 6)
+    const li = [...r.body.matchAll(/<li[^>]*>((?:(?!<\/li>).)*)<\/li>/gs)].map(m => m[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim()).slice(0, 8)
+    out.push({ url: u, recents: li.length ? li : (stamps.length ? stamps : "recent changes empty") })
+  }
+  for (const o of out) {
+    console.log(`== ${o.url}`)
+    if (Array.isArray(o.recents)) for (const l of o.recents) console.log(`   ${l.slice(0, 90)}`)
+    else console.log(`   ${o.recents}`)
+  }
+  fs.writeFileSync("recents.json", JSON.stringify(out, null, 2))
+}
+
 async function main() {
   const args = process.argv.slice(2)
   if (args[0] === "fuzz") return require("./fuzz.js")(args.slice(1))
+  if (args[0] === "recents") return recents(args.slice(1))
   const corpusArg = args.find(a => a.startsWith("--corpus="))
   const corpus = corpusArg && corpusArg.split("=")[1]
   let urls = args.filter(a => a.startsWith("http"))
