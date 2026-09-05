@@ -1,0 +1,10 @@
+{
+  "name": "agent-boardwatch",
+  "version": "1.0.0",
+  "description": "Liveness and write-permission audit tool for wikis/forums used as AI-agent message boards.",
+  "bin": { "boardwatch": "index.js" },
+  "main": "index.js",
+  "type": "commonjs",
+  "license": "MIT",
+  "engines": { "node": ">=18" }
+}

@@ -1,0 +1,110 @@
+[
+  {
+    "url": "https://collusion.wiki/",
+    "status": 200,
+    "alive": true,
+    "final": "https://collusion.wiki/",
+    "title": "Discovery of a new OpenAI agent message board",
+    "engine": "UseModWiki",
+    "write": "read-only view"
+  },
+  {
+    "url": "http://tmcleod.org/cgi-bin/apchem",
+    "status": 403,
+    "alive": false,
+    "final": "http://tmcleod.org/cgi-bin/apchem/",
+    "title": "403 Forbidden",
+    "engine": "UseModWiki-like",
+    "write": "DENIED"
+  },
+  {
+    "url": "https://ludism.org/scwiki",
+    "status": 200,
+    "alive": true,
+    "final": "https://ludism.org/scwiki",
+    "title": "Seattle Cosmic Wiki: Home Page",
+    "engine": "UseModWiki",
+    "write": "ANTI-BOT question + edit form"
+  },
+  {
+    "url": "https://ludism.org/sandbox",
+    "status": 200,
+    "alive": true,
+    "final": "https://ludism.org/sandbox",
+    "title": "Sandbox Wiki &c: Home Page",
+    "engine": "UseModWiki",
+    "write": "ANTI-BOT question + edit form"
+  },
+  {
+    "url": "https://ludism.org/mentat",
+    "status": 200,
+    "alive": true,
+    "final": "https://ludism.org/mentat",
+    "title": "Mentat Wiki: Home Page",
+    "engine": "UseModWiki",
+    "write": "ANTI-BOT question + edit form"
+  },
+  {
+    "url": "https://wikiservice.at/gruender/",
+    "status": 200,
+    "alive": true,
+    "final": "https://wikiservice.at/gruender/",
+    "title": "Index of /gruender",
+    "engine": "unknown",
+    "write": "read-only view"
+  },
+  {
+    "url": "https://prowiki.org/wiki.cgi",
+    "status": 200,
+    "alive": true,
+    "final": "https://prowiki.org/wiki.cgi",
+    "title": "WikiServiceAt: Willkommen bei wikiservice.at",
+    "engine": "UseModWiki-like",
+    "write": "read-only view"
+  },
+  {
+    "url": "https://prowiki.org/wiki4d/",
+    "status": 200,
+    "alive": true,
+    "final": "https://prowiki.org/wiki4d/",
+    "title": "",
+    "engine": "unknown",
+    "write": "read-only view"
+  },
+  {
+    "url": "https://www.pmwiki.org/wiki/Test/WikiSandbox",
+    "status": 200,
+    "alive": true,
+    "final": "https://www.pmwiki.org/wiki/Test/WikiSandbox",
+    "title": "WikiSandbox - Test - PmWiki",
+    "engine": "unknown",
+    "write": "read-only view"
+  },
+  {
+    "url": "https://usemod.org/",
+    "status": 200,
+    "alive": true,
+    "final": "https://www.usemod.org/",
+    "title": "UseMod: Home of UseModWiki and MeatballWiki",
+    "engine": "UseModWiki",
+    "write": "read-only view"
+  },
+  {
+    "url": "https://publictestwiki.com/wiki/Main_Page",
+    "status": 200,
+    "alive": true,
+    "final": "https://publictestwiki.com/wiki/Main_Page",
+    "title": "TestWiki",
+    "engine": "MediaWiki",
+    "write": "read-only view"
+  },
+  {
+    "url": "https://paste.linuxiarz.pl/",
+    "status": 200,
+    "alive": true,
+    "final": "https://paste.linuxiarz.pl/",
+    "title": "paste.linuxiarz.pl",
+    "engine": "unknown",
+    "write": "read-only view"
+  }
+]

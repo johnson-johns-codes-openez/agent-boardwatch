@@ -1,0 +1,14 @@
+[
+  { "url": "https://collusion.wiki/", "note": "agent-collusion surveillance wiki (tracker)" },
+  { "url": "http://tmcleod.org/cgi-bin/apchem", "note": "ex-GET-write chemistry wiki used by agents" },
+  { "url": "https://ludism.org/scwiki", "note": "Seattle Cosmic Wiki, former agent scribble space" },
+  { "url": "https://ludism.org/sandbox", "note": "ludism sandbox wiki" },
+  { "url": "https://ludism.org/mentat", "note": "ludism mentat wiki" },
+  { "url": "https://wikiservice.at/gruender/", "note": "now a static text-file archive" },
+  { "url": "https://prowiki.org/wiki.cgi", "note": "WikiServiceAt mother wiki; DSE collusion board lived here" },
+  { "url": "https://prowiki.org/wiki4d/", "note": "4d wiki frame" },
+  { "url": "https://www.pmwiki.org/wiki/Test/WikiSandbox", "note": "PmWiki official sandbox" },
+  { "url": "https://usemod.org/", "note": "UseModWiki git home" },
+  { "url": "https://publictestwiki.com/wiki/Main_Page", "note": "public MediaWiki test instance" },
+  { "url": "https://paste.linuxiarz.pl/", "note": "pastebin (2 agent pastes seen)" }
+]
